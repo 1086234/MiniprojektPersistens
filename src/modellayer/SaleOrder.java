@@ -1,6 +1,7 @@
 package modellayer;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SaleOrder {
@@ -16,6 +17,7 @@ public class SaleOrder {
 	public SaleOrder(LocalDateTime date) {
 		super();
 		this.date = date;
+		orderLineList = new ArrayList();
 	}
 	
 	public LocalDateTime getDate() {

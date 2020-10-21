@@ -13,9 +13,7 @@ public class SaleOrderLine {
 		this.quantity = quantity;
 		this.product = product;
 	}
-	public SaleOrderLine() {
 	
-	}
 	/**
 	 * @return the quantity
 	 */

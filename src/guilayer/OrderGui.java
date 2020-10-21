@@ -8,9 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 
 import controllayer.SaleOrderController;
 import modellayer.Product;
@@ -32,6 +29,7 @@ public class OrderGui extends JFrame {
 	private SaleOrder saleOrder;
 	private SaleOrderController saleOrderController;
 	private Object data[][];
+
 	private JPanel contentPane;
 	private JTextField textFieldNavn;
 	private JTextField textFieldAddress;
@@ -143,28 +141,26 @@ public class OrderGui extends JFrame {
 
 	private void init() {
 		saleOrderController = new SaleOrderController();
-		saleOrderLine = new SaleOrderLine();
 		saleOrder = new SaleOrder(LocalDateTime.now());
 
 	}
 
 	private String[][] GenerateTable(List<SaleOrderLine> orderlineList) {
 		int i = 0;
+		
 		String[][] o = new String[orderlineList.size()][2];
 
 		for (SaleOrderLine SOL : orderlineList) {
-			if (orderlineList.size() == 0) {
-				o[i][0] = "test";
-				o[i][1] = "test";
-				i++;
-			} else {
-				Product p = SOL.getProduct();
-				o[i][0] = p.getName();
-				o[i][1] = Integer.toString(SOL.getQuantity());
-				i++;
-			}
-
+			Product p = SOL.getProduct();
+			o[i][0] = p.getName();
+			o[i][1] = Integer.toString(SOL.getQuantity());
+			i++;
 		}
+		
+		/*String[][] o = new String[1][2];
+		o[0][0] = "Kek";
+		o[0][1] = "W";
+		*/
 
 		return o;
 	}
