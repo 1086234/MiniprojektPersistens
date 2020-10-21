@@ -8,7 +8,7 @@ public class SaleOrderLine {
 	 * @param quantity
 	 * @param product
 	 */
-	public SaleOrderLine(int quantity, Product product) {
+	public SaleOrderLine(Product product, int quantity) {
 		super();
 		this.quantity = quantity;
 		this.product = product;
