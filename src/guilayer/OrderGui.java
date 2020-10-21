@@ -12,8 +12,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
-import gui.EmployeeListTableModel;
-import model.Employee;
+import controllayer.SaleOrderController;
+import modellayer.SaleOrder;
 import modellayer.SaleOrderLine;
 
 import javax.swing.GroupLayout;
@@ -23,11 +23,14 @@ import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class OrderGui extends JFrame {
-	private SaleOrderLineListTableModel saleOrderLineListTableModel;
-	private JTable tblSaleOrderLine;
-	
+	private SaleOrderLine saleOrderLine;
+	private SaleOrder saleOrder;
+	private SaleOrderController saleOrderController;
+	private Object data[][];
 	private JPanel contentPane;
 	private JTextField textFieldNavn;
 	private JTextField textFieldAddress;
@@ -35,6 +38,7 @@ public class OrderGui extends JFrame {
 	private JTextField textFieldCity;
 	private JTextField textFieldCustomerID;
 	private JTextField textFieldVareNo;
+	private JTable tableOrder;
 	
 	/**
 	 * Launch the application.
@@ -56,7 +60,7 @@ public class OrderGui extends JFrame {
 	 * Create the frame.
 	 */
 	public OrderGui() {
-		//init();
+		init();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 600);
 		contentPane = new JPanel();
@@ -70,16 +74,6 @@ public class OrderGui extends JFrame {
 		JPanel panel_2 = new JPanel();
 		
 		
-		JPanel pnlEmployeeList = new JPanel();
-		contentPane.add(pnlEmployeeList);
-		pnlEmployeeList.setLayout(new BorderLayout(0, 0));
-		
-		JScrollPane scrollPane = new JScrollPane();
-		pnlEmployeeList.add(scrollPane, BorderLayout.CENTER);
-
-		tblSaleOrderLine = new JTable();
-		scrollPane.setViewportView(tblSaleOrderLine);
-
 	
 		
 		
@@ -138,25 +132,42 @@ public class OrderGui extends JFrame {
 		contentPane.add(panel);
 		contentPane.add(panel_2);
 		contentPane.add(panel_1);
-	}
-	private void init() {
-		this.saleOrderLineListTableModel = new SaleOrderLineListTableModel();
-		this.tblSaleOrderLine.setModel(saleOrderLineListTableModel);
-
-		// listen to selection changes in the Employee table
+		
+		JPanel panel_Order = new JPanel();
+		contentPane.add(panel_Order);
+		
+		JScrollPane scrollPane_Order = new JScrollPane();
+		panel_Order.add(scrollPane_Order);
+		String[] columnNames = {"First Name",
+                "Last Name",
+                "Sport",
+                "# of Years",
+                "Vegetarian"};
+		
+		tableOrder = new JTable(data, columnNames);
+		panel_Order.add(tableOrder);
+		
+		
+		tableOrder.update(getGraphics());
 		
 	}
-	private Object tblEmployeesSelectionChanged() {
-		SaleOrderLine currEmployee = getCurrentSaleOrderLine();
-	//	displayEmployeeObject(currEmployee);
-		return null;
+	private void init() {
+		saleOrderController = new SaleOrderController(); 
+		saleOrderLine = new SaleOrderLine();
+		saleOrder = new SaleOrder(LocalDateTime.now());
+		List<SaleOrderLine> list = saleOrder.getOrderLineList();
+		
 	}
-	private SaleOrderLine getCurrentSaleOrderLine() {
-		int selectedRow = this.tblSaleOrderLine.getSelectedRow();
-		SaleOrderLine currEmployee = null;
-		if (selectedRow > -1) {
-			currEmployee = this.saleOrderLineListTableModel.getEmployeeOfRow(selectedRow);
+	private Object[][] GenerateTable(List<SaleOrderLine> orderlineList){
+		 int i = 0;
+		 for (SaleOrderLine SOL : orderlineList) {
+			
+		        Product p = SOL.getProduct();
+		        o[i][0] = product.getName();
+		        o[i][1] = SOL.getQuantity();
+		        i++;
 		}
-		return currEmployee;
+
+	    return o;
 	}
 }
