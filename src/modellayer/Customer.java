@@ -2,16 +2,18 @@ package modellayer;
 
 public class Customer {
 	private int id;
-	private String name;
+	private String fname;
+	private String lname;
 	private String address;
 	private int zipCode;
 	private String city;
 	private String phoneNo;
 	
-	public Customer(int id, String name, String address, int zipCode, String city, String phoneNo) {
+	public Customer(int id, String fname,String lname, String address, int zipCode, String city, String phoneNo) {
 		
 		this.id = id;
-		this.name = name;
+		this.fname = fname;
+		this.lname = lname;
 		this.address = address;
 		this.zipCode = zipCode;
 		this.city = city;
@@ -21,6 +23,34 @@ public class Customer {
 	public Customer() {
 		
 	}
+	
+	/**
+	 * @return the fname
+	 */
+	public String getFname() {
+		return fname;
+	}
+
+	/**
+	 * @param fname the fname to set
+	 */
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	/**
+	 * @return the lname
+	 */
+	public String getLname() {
+		return lname;
+	}
+
+	/**
+	 * @param lname the lname to set
+	 */
+	public void setLname(String lname) {
+		this.lname = lname;
+	}	
 
 	/**
 	 * @return the id
@@ -34,20 +64,6 @@ public class Customer {
 	 */
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	/**

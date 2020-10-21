@@ -65,9 +65,10 @@ public class CustomerDB implements CustomerDBIF {
 		Customer customer = new Customer();
 		try {
 			customer.setId(rs.getInt("id"));
-			customer.setName(rs.getString("name"));
+			customer.setFname(rs.getString("fname"));
+			customer.setLname(rs.getString("lname"));
 			customer.setAddress(rs.getString("address"));
-			customer.setZipCode(rs.getInt("zipCode"));
+			customer.setZipCode(rs.getInt("zipcode"));
 			customer.setCity(rs.getString("city"));
 			customer.setPhoneNo(rs.getString("phone"));
 		
