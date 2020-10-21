@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import controllayer.DataAccessException;
 import controllayer.SaleOrderController;
 import modellayer.Product;
 import modellayer.SaleOrder;
@@ -55,8 +56,9 @@ public class OrderGui extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws DataAccessException 
 	 */
-	public OrderGui() {
+	public OrderGui() throws DataAccessException {
 		init();
 		saleOrderController.createOrder();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -134,12 +136,17 @@ public class OrderGui extends JFrame {
 		tableOrder = new JTable(GenerateTable(saleOrderController.getOrderLineList()), columnNames);
 		panel_Order.add(tableOrder);
 
-		tableOrder.update(getGraphics());
+		
 
 	}
 
-	private void init() {
+	private void init() throws DataAccessException {
 		saleOrderController = new SaleOrderController();
+
+		saleOrder = new SaleOrder(LocalDateTime.now());
+		saleOrderController.createOrder();
+		saleOrderController.addProduct(1, 1);
+		
 	}
 
 	private String[][] GenerateTable(List<SaleOrderLine> orderlineList) {
