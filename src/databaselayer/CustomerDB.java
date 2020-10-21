@@ -9,7 +9,7 @@ import java.util.List;
 
 import controllayer.DataAccessException;
 import modellayer.Customer;
-import modellayer.Product;
+
 
 public class CustomerDB implements CustomerDBIF {
 	
