@@ -47,8 +47,4 @@ public class SaleOrderController {
 	public void endOrder() {
 		System.out.println(saleOrder.getDeliveryNote());
 	}
-	
-	public List<SaleOrderLine> getOrderLineList(){
-		return saleOrder.getOrderLineList();
-	}
 }

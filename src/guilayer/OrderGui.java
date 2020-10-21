@@ -142,8 +142,6 @@ public class OrderGui extends JFrame {
 
 	private void init() throws DataAccessException {
 		saleOrderController = new SaleOrderController();
-
-		saleOrder = new SaleOrder(LocalDateTime.now());
 		saleOrderController.createOrder();
 		saleOrderController.addProduct(1, 1);
 		
