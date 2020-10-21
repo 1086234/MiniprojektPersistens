@@ -17,7 +17,7 @@ public class SaleOrderLine {
 	/**
 	 * @return the quantity
 	 */
-	public int getQuantity(Product product) {
+	public int getQuantity() {
 		return quantity;
 	}
 
@@ -30,7 +30,7 @@ public class SaleOrderLine {
 	/**
 	 * @return the quantity
 	 */
-	public Product getProduct(Product product){
+	public Product getProduct(){
 		return product;
 	}
 
