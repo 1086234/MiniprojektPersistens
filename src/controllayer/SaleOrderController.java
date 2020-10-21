@@ -16,15 +16,18 @@ public class SaleOrderController {
 		saleOrder = new SaleOrder(LocalDateTime.now());
 	}
 	
-	public void addProduct(Product product, int quantity) {
-		saleOrder.addSaleOrderLine(new SaleOrderLine(product, quantity));
+	public void addProduct(int productId, int quantity) throws DataAccessException {
+		productController = new ProductController();	
+		saleOrder.addSaleOrderLine(new SaleOrderLine(productController.findProduct(productId), quantity));
 	}
 	
-	public void addCustomer(int cId){
-		
+	public void addCustomer(int cId) throws DataAccessException{
+		customerController = new CustomerController();
+		saleOrder.setCustomer(customerController.findCustomer(cId));
 	}
 	
 	public void endOrder() {
 		
+		System.out.println(saleOrder.getDeliveryNote());
 	}
 }

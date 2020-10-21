@@ -10,6 +10,7 @@ public class SaleOrder {
 	private String deliveryStatus;
 	private LocalDateTime deliveryDate;
 	private String deliveryNote;
+	private Customer customer;
 	private List<SaleOrderLine> orderLineList;
 	
 	public SaleOrder(LocalDateTime date) {
@@ -55,6 +56,14 @@ public class SaleOrder {
 
 	public void setDeliveryNote(String deliveryNote) {
 		this.deliveryNote = deliveryNote;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public List<SaleOrderLine> getOrderLineList() {

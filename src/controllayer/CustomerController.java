@@ -1,19 +1,17 @@
 package controllayer;
 
-import databaselayer.CustomerDBIF;
+import databaselayer.CustomerDB;
 import modellayer.Customer;
 
 public class CustomerController {
-	private CustomerDBIF customerDB;
+	private CustomerDB customerDB;
 	private Customer customer;
 	
-	public CustomerController(CustomerDBIF customerDB, Customer customer) {
-		super();
-		this.customerDB = customerDB;
-		this.customer = customer;
+	public CustomerController() {
+
 	}
 	
-	public Customer findCustomer(int cId) {
-		return customerDB.findCustomer(cID);
+	public Customer findCustomer(int cId) throws DataAccessException {
+		return customerDB.findCustomer(cId);
 	}
 }
