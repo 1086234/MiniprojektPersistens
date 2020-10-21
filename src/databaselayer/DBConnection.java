@@ -20,11 +20,11 @@ public class DBConnection {
 	private static DBConnection dbConnection;
 
 	private static final String driverClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private static final String dbName = "dmaa0220_1086764";
+	private static final String dbName = "dmaa0220_1083764";
 	//private static final String serverAddress = "localhost";
 	private static final String serverAddress = "hildur.ucn.dk";
 	private static final int serverPort = 1433;
-	private static final String userName = "dmaa0220_1086764";
+	private static final String userName = "dmaa0220_1083764";
 	private static final String password = "Password1!";
 
 	private DBConnection() throws DataAccessException {

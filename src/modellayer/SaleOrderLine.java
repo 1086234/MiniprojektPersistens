@@ -14,6 +14,10 @@ public class SaleOrderLine {
 		this.product = product;
 	}
 	
+	public SaleOrderLine() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * @return the quantity
 	 */
