@@ -20,11 +20,13 @@ public class SaleOrderController {
 		saleOrder.addSaleOrderLine(new SaleOrderLine(product, quantity));
 	}
 	
-	public void addCustomer(int cId){
-		
+	public void addCustomer(int cId) throws DataAccessException{
+		customerController = new CustomerController();
+		saleOrder.setCustomer(customerController.findCustomer(cId));
 	}
 	
 	public void endOrder() {
 		
+		System.out.println(saleOrder.getDeliveryNote());
 	}
 }
