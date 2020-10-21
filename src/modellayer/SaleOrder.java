@@ -1,6 +1,7 @@
 package modellayer;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class SaleOrder {
 	
@@ -9,15 +10,11 @@ public class SaleOrder {
 	private String deliveryStatus;
 	private LocalDateTime deliveryDate;
 	private String deliveryNote;
+	private List<SaleOrderLine> orderLineList;
 	
-	public SaleOrder(LocalDateTime date, int amount, String deliveryStatus, LocalDateTime deliveryDate,
-			String deliveryNote) {
+	public SaleOrder(LocalDateTime date) {
 		super();
 		this.date = date;
-		this.amount = amount;
-		this.deliveryStatus = deliveryStatus;
-		this.deliveryDate = deliveryDate;
-		this.deliveryNote = deliveryNote;
 	}
 	
 	public LocalDateTime getDate() {
@@ -59,4 +56,15 @@ public class SaleOrder {
 	public void setDeliveryNote(String deliveryNote) {
 		this.deliveryNote = deliveryNote;
 	}
+
+	public List<SaleOrderLine> getOrderLineList() {
+		return orderLineList;
+	}
+
+	public void addSaleOrderLine(SaleOrderLine saleOrderLine) {
+		this.orderLineList.add(saleOrderLine);
+	}
+
+
+	
 }
