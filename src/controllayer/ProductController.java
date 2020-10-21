@@ -5,7 +5,7 @@ import databaselayer.ProductDBIF;
 import modellayer.Product;
 
 public class ProductController {
-	private ProductDBIF productDB;
+	private ProductDB productDB;
 
 	public ProductController() throws DataAccessException {
 		productDB = new ProductDB();

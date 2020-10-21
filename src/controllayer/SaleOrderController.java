@@ -16,9 +16,16 @@ public class SaleOrderController {
 		saleOrder = new SaleOrder(LocalDateTime.now());
 	}
 	
-	public void addProduct(int productId, int quantity) throws DataAccessException {
-		productController = new ProductController();	
-		saleOrder.addSaleOrderLine(new SaleOrderLine(productController.findProduct(productId), quantity));
+	public boolean addProduct(int productId, int quantity) throws DataAccessException {
+		productController = new ProductController();
+		Product product = productController.findProduct(productId);
+		if(product.getStock() >= quantity) {
+			saleOrder.addSaleOrderLine(new SaleOrderLine(product, quantity));
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public void addCustomer(int cId) throws DataAccessException{
