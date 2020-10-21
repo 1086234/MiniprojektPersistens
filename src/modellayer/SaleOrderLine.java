@@ -9,11 +9,13 @@ public class SaleOrderLine {
 	 * @param product
 	 */
 	public SaleOrderLine(Product product, int quantity) {
-		super();
+		
 		this.quantity = quantity;
 		this.product = product;
 	}
+	public SaleOrderLine() {
 	
+	}
 	/**
 	 * @return the quantity
 	 */

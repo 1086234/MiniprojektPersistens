@@ -13,6 +13,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import controllayer.SaleOrderController;
+import modellayer.Product;
 import modellayer.SaleOrder;
 import modellayer.SaleOrderLine;
 
@@ -39,7 +40,7 @@ public class OrderGui extends JFrame {
 	private JTextField textFieldCustomerID;
 	private JTextField textFieldVareNo;
 	private JTable tableOrder;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -66,108 +67,105 @@ public class OrderGui extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+
 		JPanel panel = new JPanel();
-		
+
 		JPanel panel_1 = new JPanel();
-		
+
 		JPanel panel_2 = new JPanel();
-		
-		
-	
-		
-		
-		
-		
-		
+
 		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		JLabel lblVareNo = new JLabel("Varer Nummer");
-		
+
 		textFieldVareNo = new JTextField();
 		textFieldVareNo.setColumns(10);
-		
+
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		panel_1.add(lblVareNo);
 		panel_1.add(textFieldVareNo);
-		
+
 		JLabel lblCustomerID = new JLabel("kunde ID: ");
-		
+
 		JLabel lblCustomerName = new JLabel("navn : ");
-		
+
 		JLabel lblAddress = new JLabel("adresse :");
-		
+
 		textFieldZipCode = new JTextField();
 		textFieldZipCode.setColumns(10);
-		
+
 		JLabel lblZipCode = new JLabel("PostNummer :");
-		
+
 		JLabel lblCity = new JLabel("by :");
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		panel.add(lblCustomerID);
-		
+
 		textFieldCustomerID = new JTextField();
 		textFieldCustomerID.setColumns(10);
 		panel.add(textFieldCustomerID);
 		panel.add(lblCustomerName);
-		
+
 		textFieldNavn = new JTextField();
 		textFieldNavn.setColumns(10);
 		panel.add(textFieldNavn);
 		panel.add(lblCity);
-		
+
 		textFieldCity = new JTextField();
 		textFieldCity.setColumns(10);
 		panel.add(textFieldCity);
 		panel.add(lblAddress);
-		
+
 		textFieldAddress = new JTextField();
 		textFieldAddress.setColumns(10);
 		panel.add(textFieldAddress);
 		panel.add(lblZipCode);
 		panel.add(textFieldZipCode);
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		contentPane.add(panel);
 		contentPane.add(panel_2);
 		contentPane.add(panel_1);
-		
+
 		JPanel panel_Order = new JPanel();
 		contentPane.add(panel_Order);
-		
+
 		JScrollPane scrollPane_Order = new JScrollPane();
 		panel_Order.add(scrollPane_Order);
-		String[] columnNames = {"First Name",
-                "Last Name",
-                "Sport",
-                "# of Years",
-                "Vegetarian"};
-		
-		tableOrder = new JTable(data, columnNames);
+		String[] columnNames = { "First Name", "Last Name" };
+
+		tableOrder = new JTable(GenerateTable(saleOrder.getOrderLineList()), columnNames);
 		panel_Order.add(tableOrder);
-		
-		
+
 		tableOrder.update(getGraphics());
-		
+
 	}
+
 	private void init() {
-		saleOrderController = new SaleOrderController(); 
+		saleOrderController = new SaleOrderController();
 		saleOrderLine = new SaleOrderLine();
 		saleOrder = new SaleOrder(LocalDateTime.now());
-		List<SaleOrderLine> list = saleOrder.getOrderLineList();
-		
+
 	}
-	private Object[][] GenerateTable(List<SaleOrderLine> orderlineList){
-		 int i = 0;
-		 for (SaleOrderLine SOL : orderlineList) {
-			
-		        Product p = SOL.getProduct();
-		        o[i][0] = product.getName();
-		        o[i][1] = SOL.getQuantity();
-		        i++;
+
+	private String[][] GenerateTable(List<SaleOrderLine> orderlineList) {
+		int i = 0;
+		String[][] o = new String[orderlineList.size()][2];
+
+		for (SaleOrderLine SOL : orderlineList) {
+			if (orderlineList.size() == 0) {
+				o[i][0] = "test";
+				o[i][1] = "test";
+				i++;
+			} else {
+				Product p = SOL.getProduct();
+				o[i][0] = p.getName();
+				o[i][1] = Integer.toString(SOL.getQuantity());
+				i++;
+			}
+
 		}
 
-	    return o;
+		return o;
 	}
 }
