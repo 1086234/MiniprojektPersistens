@@ -25,8 +25,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderGui extends JFrame {
-	private SaleOrderLine saleOrderLine;
-	private SaleOrder saleOrder;
 	private SaleOrderController saleOrderController;
 	private Object data[][];
 
@@ -60,6 +58,7 @@ public class OrderGui extends JFrame {
 	 */
 	public OrderGui() {
 		init();
+		saleOrderController.createOrder();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 600);
 		contentPane = new JPanel();
@@ -132,7 +131,7 @@ public class OrderGui extends JFrame {
 		panel_Order.add(scrollPane_Order);
 		String[] columnNames = { "First Name", "Last Name" };
 
-		tableOrder = new JTable(GenerateTable(saleOrder.getOrderLineList()), columnNames);
+		tableOrder = new JTable(GenerateTable(saleOrderController.getOrderLineList()), columnNames);
 		panel_Order.add(tableOrder);
 
 		tableOrder.update(getGraphics());
@@ -141,8 +140,6 @@ public class OrderGui extends JFrame {
 
 	private void init() {
 		saleOrderController = new SaleOrderController();
-		saleOrder = new SaleOrder(LocalDateTime.now());
-
 	}
 
 	private String[][] GenerateTable(List<SaleOrderLine> orderlineList) {
