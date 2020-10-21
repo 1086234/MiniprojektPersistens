@@ -9,6 +9,7 @@ import java.util.List;
 
 import controllayer.DataAccessException;
 import modellayer.Customer;
+import modellayer.Product;
 
 public class CustomerDB implements CustomerDBIF {
 	
@@ -37,7 +38,7 @@ public class CustomerDB implements CustomerDBIF {
 		Customer cus = null;
 		try {
 			findById.setInt(1, cId);
-			ResultSet re = findById.executeQuery();
+			ResultSet rs = findById.executeQuery();
 			if(rs.next()) {
 				cus = buildObject(rs);
 			}
@@ -50,7 +51,7 @@ public class CustomerDB implements CustomerDBIF {
 	private List<Customer> buildObjects(ResultSet rs) throws DataAccessException {
 		List<Customer> res = new ArrayList<>();
 		try {
-			while (re.next()) {
+			while (rs.next()) {
 				Customer currCustomer = buildObject(rs);
 				res.add(currCustomer);
 			}
@@ -61,8 +62,21 @@ public class CustomerDB implements CustomerDBIF {
 	}
 	
 	private Customer buildObject(ResultSet rs) throws DataAccessException {
-		Customer currCustomer = new Customer();
-	}
+		Customer customer = new Customer();
+		try {
+			customer.setId(rs.getInt("id"));
+			customer.setName(rs.getString("name"));
+			customer.setAddress(rs.getString("address"));
+			customer.setZipCode(rs.getInt("zipCode"));
+			customer.setCity(rs.getString("city"));
+			customer.setPhoneNo(rs.getString("phone"));
+		
 
+		} catch (SQLException e) {
+			throw new DataAccessException(DBMessages.COULD_NOT_READ_RESULTSET, e);
+
+		}
+		return customer;
+	}
 	
 }
