@@ -43,7 +43,7 @@ public class OrderGui extends JFrame {
 	private JTextField textFieldCity;
 	private JTextField textFieldCustomerID;
 	private JTextField txtVareNo;
-	private JTextField textField_Quantity;
+	private JTextField textFieldQuantity;
 
 	/**
 	 * Launch the application.
@@ -199,9 +199,20 @@ public class OrderGui extends JFrame {
 		JLabel lblQuantity = new JLabel("Antal ");
 		panel_1.add(lblQuantity);
 
-		textField_Quantity = new JTextField();
-		panel_1.add(textField_Quantity);
-		textField_Quantity.setColumns(10);
+		textFieldQuantity = new JTextField();
+		panel_1.add(textFieldQuantity);
+		textFieldQuantity.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					addProductToOrderLine();
+				} catch (NumberFormatException | DataAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		textFieldQuantity.setColumns(10);
 		GroupLayout gl_panel_Order = new GroupLayout(panel_Order);
 		gl_panel_Order.setHorizontalGroup(gl_panel_Order.createParallelGroup(Alignment.LEADING)
 				.addComponent(scrollPane_Order, GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE));
@@ -256,10 +267,11 @@ public class OrderGui extends JFrame {
 
 	private void addProductToOrderLine() throws NumberFormatException, DataAccessException {
 
-		boolean fundet = saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()), 1);
+		boolean fundet = saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()),
+				Integer.parseInt(textFieldQuantity.getText()));
 
 		if (!fundet) {
-			JOptionPane.showMessageDialog(null, "Den er ikke en varer med det varer nummer ",
+			JOptionPane.showMessageDialog(null, "Den er ikke en vare med det varer nummer ",
 					"InfoBox: " + "Ikke i systemet", JOptionPane.INFORMATION_MESSAGE);
 
 		}
