@@ -278,8 +278,14 @@ public class OrderGui extends JFrame {
 		fillTable();
 	}
 	private void addProductToOrderLine() throws NumberFormatException, DataAccessException {
-		
-		 int fundet = saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()), Integer.parseInt(textField_Quantity.getText()));
+		int quantity = 1;
+		if(textField_Quantity.getText().equals("")){
+			
+		}
+		else {
+			quantity = Integer.parseInt(textField_Quantity.getText());
+		}
+		 int fundet = saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()), quantity);
 	
 		 switch(fundet) {
 		 case 1:
