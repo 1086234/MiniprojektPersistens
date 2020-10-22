@@ -55,6 +55,15 @@ public class SaleOrderController {
 
 		return inStock;
 	}
+	
+	public int CalcTotalPrice() {
+		int total = 0;
+		for(SaleOrderLine SOL: saleOrder.getOrderLineList()) {
+			total += SOL.getProduct().getSalesPrice() * SOL.getQuantity();
+		}
+		return total;
+	}
+	
 
 	public List<SaleOrderLine> getOrderLineList() {
 		return saleOrder.getOrderLineList();
