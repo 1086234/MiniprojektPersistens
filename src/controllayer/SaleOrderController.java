@@ -36,10 +36,6 @@ public class SaleOrderController {
 	public List<SaleOrderLine> getOrderLineList() {
 		return saleOrder.getOrderLineList();
 	}
-	
-	public void clearOrderLineList(){
-		saleOrder.clearOrderLineList();
-	}
 
 	public void addCustomer(int cId) throws DataAccessException {
 		customerController = new CustomerController();

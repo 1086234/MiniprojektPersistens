@@ -14,7 +14,7 @@ import modellayer.*;
 
 public class ProductDB implements ProductDBIF {
 	private Product product;
-	private static final String FIND_BY_VARENO = "select productId , name, purchasePrice , countryOfOrigin, minStock, maxStock, stock  from product where productId = ?";
+	private static final String FIND_BY_VARENO = "select * from product where vareNo = ?";
 	private PreparedStatement findByVareNo;
 	private static final String UPDATE_STOCK_BY_VARENO = "update product stock = ? where vareNo = ?";
 	private PreparedStatement updateStockByVareNO;
@@ -91,14 +91,13 @@ public class ProductDB implements ProductDBIF {
 	private Product buildObject(ResultSet rs) throws DataAccessException {
 		Product product = new Product();
 		try {
-			product.setVareNo(rs.getInt("productId"));
+			product.setVareNo(rs.getInt("vareNo"));
 			product.setName(rs.getString("name"));
 			product.setSalesPrice(rs.getDouble("purchasePrice"));
 			product.setCountryOfOrigin(rs.getString("countryOfOrigin"));
 			product.setStock(rs.getInt("stock"));
 			product.setMinStock(rs.getInt("minStock"));
 			product.setMaxStock(rs.getInt("MaxStock"));
-
 		} catch (SQLException e) {
 			throw new DataAccessException(DBMessages.COULD_NOT_READ_RESULTSET, e);
 

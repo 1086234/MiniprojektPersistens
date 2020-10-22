@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class OrderGui extends JFrame {
 	private JTextField textFieldZipCode;
 	private JTextField textFieldCity;
 	private JTextField textFieldCustomerID;
-	private JTextField textFieldVareNo;
+	private JTextField txtVareNo;
 
 
 	/**
@@ -79,13 +80,24 @@ public class OrderGui extends JFrame {
 
 		JLabel lblVareNo = new JLabel("Varer Nummer");
 
-		textFieldVareNo = new JTextField();
-		textFieldVareNo.setColumns(10);
+		txtVareNo = new JTextField();
+	    txtVareNo.addActionListener(new java.awt.event.ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	          try {
+				saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()), 1);
+				fillTable();
+			} catch (NumberFormatException | DataAccessException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	        }
+	      });
+		txtVareNo.setColumns(10);
 
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		panel_1.add(lblVareNo);
-		panel_1.add(textFieldVareNo);
+		panel_1.add(txtVareNo);
 
 		JLabel lblCustomerID = new JLabel("kunde ID: ");
 
