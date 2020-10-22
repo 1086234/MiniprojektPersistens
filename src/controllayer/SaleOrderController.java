@@ -69,6 +69,11 @@ public class SaleOrderController {
 	public void addCustomer(int cId) throws DataAccessException {
 		saleOrder.setCustomer(customerController.findCustomer(cId));
 	}
+	
+	public void addCustomer() throws DataAccessException {
+		saleOrder.setCustomer();
+	}
+
 
 	public void removeSaleOrderLine(int index) {
 		saleOrder.removeSaleOrderLine(index);
@@ -84,5 +89,13 @@ public class SaleOrderController {
 	
 	public void addOrder(SaleOrder order) throws DataAccessException, SQLException {
 		saleOrderDB.insertOrder(order);
+	}
+	
+	public void updateNumberOfProducts() throws DataAccessException {
+		
+		for (SaleOrderLine orderLine : saleOrder.getOrderLineList()) 
+		{ 
+			productController.updateStock(orderLine.getProduct(), orderLine.getQuantity());
+		}
 	}
 }

@@ -54,17 +54,14 @@ public class ProductDB implements ProductDBIF {
 	}
 
 	@Override
-	public Product updateStock(Product product, int quintity) throws DataAccessException{
+	public Product updateStock(Product product, int quantity) throws DataAccessException{
 		Product res = null;
 		
 		try {
 			int vareNo = product.getVareNo();
 			updateStockByVareNO.setInt(2, vareNo);
-			updateStockByVareNO.setInt(1, quintity);
-			ResultSet rs = updateStockByVareNO.executeQuery();
-			if(rs.next()) {
-				res = buildObject(rs);
-			}
+			updateStockByVareNO.setInt(1, quantity);
+			updateStockByVareNO.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			throw new DataAccessException(DBMessages.COULD_NOT_BIND_OR_EXECUTE_QUERY, e);

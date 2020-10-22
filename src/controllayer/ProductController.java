@@ -13,7 +13,7 @@ public class ProductController {
 	public Product findProduct(int VareNo) throws DataAccessException {
 		return productDB.findByVareNo(VareNo);
 	}
-	public void updateStock(Product product, int quintity) throws DataAccessException {
-		productDB.updateStock(product, quintity);
+	public void updateStock(Product product, int quantity) throws DataAccessException {
+		productDB.updateStock(product, productDB.findByVareNo(product.getVareNo()).getStock()-quantity);
 	}
 }

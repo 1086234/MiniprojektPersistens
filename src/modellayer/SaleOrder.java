@@ -71,6 +71,10 @@ public class SaleOrder {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+	
+	public void setCustomer() {
+		this.customer = null;
+	}
 
 	public List<SaleOrderLine> getOrderLineList() {
 		return orderLineList;

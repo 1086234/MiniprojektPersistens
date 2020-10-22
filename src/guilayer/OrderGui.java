@@ -114,6 +114,7 @@ public class OrderGui extends JFrame {
 		panel.add(lblCustomerID);
 
 		textFieldCustomerID = new JTextField();
+		textFieldCustomerID.setText("");
 		textFieldCustomerID.setColumns(10);
 		panel.add(textFieldCustomerID);
 		panel.add(lblCustomerName);
@@ -160,7 +161,7 @@ public class OrderGui extends JFrame {
 		JButton btnCancal = new JButton("Annuller");
 		btnCancal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				annullerOrdre();
+				clear();
 			}
 		});
 
@@ -248,7 +249,7 @@ public class OrderGui extends JFrame {
 
 	}
 
-	private void annullerOrdre() {
+	private void clear() {
 		saleOrderController.clearOrderLineList();
 		fillTable();
 	}
@@ -267,14 +268,19 @@ public class OrderGui extends JFrame {
 
 	private void betal() throws DataAccessException, SQLException {
 		// Add costumer to order
-		saleOrderController.addCustomer(Integer.parseInt(textFieldCustomerID.getText()));
+		String ree = textFieldCustomerID.getText();
+		if (textFieldCustomerID.getText() != "")
+			saleOrderController.addCustomer(Integer.parseInt(textFieldCustomerID.getText()));
+		else
+			saleOrderController.addCustomer();
 
 		// AddOrdreLine to database
 		saleOrderController.addOrder(saleOrderController.getOrder());
 
 		// Remove the numbers of products sold from database
-		
-		
+		saleOrderController.updateNumberOfProducts();
+
 		// Clear the table
+		clear();
 	}
 }
