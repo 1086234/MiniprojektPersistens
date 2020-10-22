@@ -37,7 +37,16 @@ class Controller {
 	@Test
 	void AddProductToOrderLineTestNotTrue() throws DataAccessException {
 		
-		assertFalse(saleOrderController.addProduct(2, 1));
+		assertFalse(saleOrderController.addProduct(32124, 1));
 	}
-
+	@Test
+	void quantityTest() throws DataAccessException {
+		saleOrderController.addProduct(1, 1);
+		assertTrue(saleOrderController.quantityProduct(0, 10));
+	}
+	@Test
+	void quantityTestNotTrue() throws DataAccessException {
+		saleOrderController.addProduct(1, 1);
+		assertFalse(saleOrderController.quantityProduct(0, 12220));
+	}
 }
