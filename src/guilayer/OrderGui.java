@@ -30,7 +30,6 @@ import java.awt.event.ActionListener;
 
 public class OrderGui extends JFrame {
 	private SaleOrderController saleOrderController;
-	private Object data[][];
 	private SaleOrderLineListTableModel solltm;
 	private JTable tableOrder;
 	
