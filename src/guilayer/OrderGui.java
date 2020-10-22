@@ -131,7 +131,7 @@ public class OrderGui extends JFrame {
 
 		JScrollPane scrollPane_Order = new JScrollPane();
 		panel_Order.add(scrollPane_Order);
-		String[] columnNames = { "First Name", "Last Name" };
+		String columnNames[] = { "ID", "NAME", "QUANTITY" };
 
 		tableOrder = new JTable(GenerateTable(saleOrderController.getOrderLineList()), columnNames);
 		panel_Order.add(tableOrder);
@@ -143,14 +143,13 @@ public class OrderGui extends JFrame {
 	private void init() throws DataAccessException {
 		saleOrderController = new SaleOrderController();
 		saleOrderController.createOrder();
-		saleOrderController.addProduct(1, 1);
 		
 	}
 
 	private String[][] GenerateTable(List<SaleOrderLine> orderlineList) {
 		int i = 0;
 		
-		String[][] o = new String[orderlineList.size()][2];
+		String[][] o = new String[orderlineList.size()][3];
 
 		for (SaleOrderLine SOL : orderlineList) {
 			Product p = SOL.getProduct();

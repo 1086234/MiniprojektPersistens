@@ -3,9 +3,10 @@ package modellayer;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SaleOrder {
-	
+
 	private LocalDateTime date;
 	private int amount;
 	private String deliveryStatus;
@@ -13,33 +14,28 @@ public class SaleOrder {
 	private String deliveryNote;
 	private Customer customer;
 	private List<SaleOrderLine> orderLineList;
-	
-	
+
 	public SaleOrder(LocalDateTime date) {
-		super();
 		this.date = date;
 		orderLineList = new ArrayList<SaleOrderLine>();
-		//Product p = new Product(1, "Yeet", 13, "China", 5, 2, 20);
-		//SaleOrderLine saleorder = new SaleOrderLine(p, 2);
-		//orderLineList.add(saleorder);
 	}
-	
+
 	public LocalDateTime getDate() {
 		return date;
 	}
-	
+
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
-	
+
 	public int getAmount() {
 		return amount;
 	}
-	
+
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	
+
 	public String getDeliveryStatus() {
 		return deliveryStatus;
 	}
@@ -78,5 +74,9 @@ public class SaleOrder {
 
 	public void addSaleOrderLine(SaleOrderLine saleOrderLine) {
 		this.orderLineList.add(saleOrderLine);
-	}	
+	}
+	
+	public void clearOrderLineList() {
+		this.orderLineList.clear();
+	}
 }
