@@ -209,6 +209,18 @@ public class OrderGui extends JFrame {
 		
 		textField_Quantity = new JTextField();
 		panel_1.add(textField_Quantity);
+		
+		  textField_Quantity.addActionListener(new java.awt.event.ActionListener() {
+		        public void actionPerformed(ActionEvent e) {
+		          try {
+		        	  addProductToOrderLine();
+				} catch (NumberFormatException | DataAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		        }
+		      });
+		
 		textField_Quantity.setColumns(10);
 		GroupLayout gl_panel_Order = new GroupLayout(panel_Order);
 		gl_panel_Order.setHorizontalGroup(
@@ -267,7 +279,7 @@ public class OrderGui extends JFrame {
 	}
 	private void addProductToOrderLine() throws NumberFormatException, DataAccessException {
 		
-		 boolean fundet = saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()), 1);
+		 boolean fundet = saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()), Integer.parseInt(textField_Quantity.getText()));
 		 
 		 if(!fundet) {
 			 JOptionPane.showMessageDialog(null, "Den er ikke en varer med det varer nummer ", "InfoBox: " + "Ikke i systemet", JOptionPane.INFORMATION_MESSAGE);
