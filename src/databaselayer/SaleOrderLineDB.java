@@ -14,7 +14,7 @@ public class SaleOrderLineDB implements SaleOrderLineDBIF {
 	private static final String INSERT_Q = "INSERT INTO salOrderLine(quantity, productVareId, saleOrderId) VALUES (?,?,?)";
 	private PreparedStatement insertSaleOrderLine;
 
-	public SaleOrderDB() throws DataAccessException {
+	public void SaleOrderDB() throws DataAccessException {
 		init();
 	}
 

@@ -1,6 +1,7 @@
 package controllayer;
 
 import java.util.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class SaleOrderController {
 
 	public void createOrder() throws DataAccessException {
 
-		saleOrder = new SaleOrder(LocalDateTime.now());
+		saleOrder = new SaleOrder(LocalDate.now());
 		saleOrderDB = new SaleOrderDB();
 
 	}
