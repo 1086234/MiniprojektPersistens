@@ -1,33 +1,32 @@
 package modellayer;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SaleOrder {
 	
-	private LocalDate date;
+	private LocalDateTime date;
 	private int amount;
 	private String deliveryStatus;
-	private LocalDate deliveryDate;
+	private LocalDateTime deliveryDate;
 	private String deliveryNote;
 	private Customer customer;
 	private List<SaleOrderLine> orderLineList;
 	
 	
-	public SaleOrder(LocalDate date) {
+	public SaleOrder(LocalDateTime date) {
 		super();
 		this.date = date;
 		orderLineList = new ArrayList<SaleOrderLine>();
 	
 	}
 	
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 	
-	public void setDate(LocalDate date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 	
@@ -47,11 +46,11 @@ public class SaleOrder {
 		this.deliveryStatus = deliveryStatus;
 	}
 
-	public LocalDate getDeliveryDate() {
+	public LocalDateTime getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	public void setDeliveryDate(LocalDate deliveryDate) {
+	public void setDeliveryDate(LocalDateTime deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 

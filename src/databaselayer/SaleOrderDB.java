@@ -3,14 +3,10 @@ package databaselayer;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import controllayer.DataAccessException;
-import modellayer.Product;
 import modellayer.SaleOrder;
-import modellayer.SaleOrderLine;
 
 public class SaleOrderDB {
 	private SaleOrder saleOrder;
@@ -56,6 +52,7 @@ public class SaleOrderDB {
 	
 	public void insertInvoice(SaleOrder order) throws DataAccessException {
 		try {
+			
 			insertInvoice.setDate(1, Date.valueOf(order.getDate()));
 			insertInvoice.setInt(2, order.getAmount());
 			
