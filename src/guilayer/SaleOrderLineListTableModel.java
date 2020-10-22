@@ -3,6 +3,7 @@ package guilayer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 import modellayer.Product;
 import modellayer.SaleOrderLine;
@@ -13,9 +14,9 @@ import modellayer.SaleOrderLine;
  * @author knol
  * @version 2018-08-30
  */
-public class SaleOrderLineListTableModel extends AbstractTableModel {
+public class SaleOrderLineListTableModel extends DefaultTableModel {
 	private static final long serialVersionUID = 1L;
-	private List<SaleOrderLine> data;
+	private List<SaleOrderLine> data = new ArrayList<>();
 	private static final String[] COL_NAMES = { "First name", "Mid. init", "Last name" };
 
 	public SaleOrderLineListTableModel() {
@@ -58,11 +59,11 @@ public class SaleOrderLineListTableModel extends AbstractTableModel {
 		
 		switch (column) {
 		case 0:
-			return null;
+			return e.getProduct().getName();
 		case 1:
-			return null;
+			return e.getProduct().getStock();
 		case 2:
-			return null;
+			return e.getProduct().getStock();
 		default:
 			return "UNKNOLWN COL NAME";
 		}
@@ -70,7 +71,7 @@ public class SaleOrderLineListTableModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return data.size();
+		return (data == null ? 0:  data.size());
 	}
 
 }

@@ -19,9 +19,7 @@ public class SaleOrder {
 		super();
 		this.date = date;
 		orderLineList = new ArrayList<SaleOrderLine>();
-		//Product p = new Product(1, "Yeet", 13, "China", 5, 2, 20);
-		//SaleOrderLine saleorder = new SaleOrderLine(p, 2);
-		//orderLineList.add(saleorder);
+	
 	}
 	
 	public LocalDateTime getDate() {

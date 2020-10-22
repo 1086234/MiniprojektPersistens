@@ -28,7 +28,9 @@ import java.util.List;
 public class OrderGui extends JFrame {
 	private SaleOrderController saleOrderController;
 	private Object data[][];
-
+	private SaleOrderLineListTableModel solltm;
+	private JTable tableOrder;
+	
 	private JPanel contentPane;
 	private JTextField textFieldNavn;
 	private JTextField textFieldAddress;
@@ -36,7 +38,7 @@ public class OrderGui extends JFrame {
 	private JTextField textFieldCity;
 	private JTextField textFieldCustomerID;
 	private JTextField textFieldVareNo;
-	private JTable tableOrder;
+
 
 	/**
 	 * Launch the application.
@@ -56,11 +58,11 @@ public class OrderGui extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws DataAccessException 
+	 * 
+	 * @throws DataAccessException
 	 */
 	public OrderGui() throws DataAccessException {
-		init();
-		saleOrderController.createOrder();
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 600);
 		contentPane = new JPanel();
@@ -131,39 +133,33 @@ public class OrderGui extends JFrame {
 
 		JScrollPane scrollPane_Order = new JScrollPane();
 		panel_Order.add(scrollPane_Order);
-		String[] columnNames = { "First Name", "Last Name" };
+	
 
-		tableOrder = new JTable(GenerateTable(saleOrderController.getOrderLineList()), columnNames);
-		panel_Order.add(tableOrder);
-
-		
+		tableOrder = new JTable();
+		scrollPane_Order.setViewportView(tableOrder);
+		init();
 
 	}
 
 	private void init() throws DataAccessException {
 		saleOrderController = new SaleOrderController();
 		saleOrderController.createOrder();
-		saleOrderController.addProduct(1, 1);
-		
+		// saleOrderController.addProduct(1, 1);
+		fillTable();
 	}
-
-	private String[][] GenerateTable(List<SaleOrderLine> orderlineList) {
-		int i = 0;
-		
-		String[][] o = new String[orderlineList.size()][2];
-
-		for (SaleOrderLine SOL : orderlineList) {
-			Product p = SOL.getProduct();
-			o[i][0] = p.getName();
-			o[i][1] = Integer.toString(SOL.getQuantity());
-			i++;
+	private SaleOrderLine getSelecetProduct() {
+		int row = tableOrder.getSelectedRow();
+		SaleOrderLine  currLine = null;
+		if(row >= 0) {
+			currLine = solltm.getEmployeeOfRow(row);
 		}
-		
-		/*String[][] o = new String[1][2];
-		o[0][0] = "Kek";
-		o[0][1] = "W";
-		*/
-
-		return o;
+		return currLine;
 	}
+	private void fillTable() {
+		solltm = new SaleOrderLineListTableModel();
+		this.tableOrder.setModel(solltm);
+		List<SaleOrderLine> data = saleOrderController.getOrderLineList();
+		solltm.setData(data);
+	}
+
 }
