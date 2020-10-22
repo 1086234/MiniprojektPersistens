@@ -23,8 +23,8 @@ public class SaleOrderController {
 
 	}
 
-	public boolean addProduct(int productId, int quantity) throws DataAccessException {
-		boolean fundet = false;
+	public int addProduct(int productId, int quantity) throws DataAccessException {
+		int fundet = 0;
 		productController = new ProductController();
 
 		Product product = null;
@@ -34,12 +34,12 @@ public class SaleOrderController {
 
 				saleOrder.addSaleOrderLine(new SaleOrderLine(product, quantity));
 
-				fundet = true;
+				fundet = 0;
 			} else {
-				fundet = false;
+				fundet = 2;
 			}
 		} else {
-			fundet = false;
+			fundet = 1;
 		}
 		return fundet;
 	}

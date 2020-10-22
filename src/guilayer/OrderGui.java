@@ -279,12 +279,17 @@ public class OrderGui extends JFrame {
 	}
 	private void addProductToOrderLine() throws NumberFormatException, DataAccessException {
 		
-		 boolean fundet = saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()), Integer.parseInt(textField_Quantity.getText()));
-		 
-		 if(!fundet) {
-			 JOptionPane.showMessageDialog(null, "Den er ikke en varer med det varer nummer ", "InfoBox: " + "Ikke i systemet", JOptionPane.INFORMATION_MESSAGE);
-			  
+		 int fundet = saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()), Integer.parseInt(textField_Quantity.getText()));
+	
+		 switch(fundet) {
+		 case 1:
+			 JOptionPane.showMessageDialog(null, "Varenummeret findes ikke. ", "InfoBox: " + "Ikke i systemet", JOptionPane.INFORMATION_MESSAGE);
+			 break;
+		 case 2:
+			 JOptionPane.showMessageDialog(null, "Der er ikke nok af den valgte vare på lager", "InfoBox: " + "Ikke nok på lager", JOptionPane.INFORMATION_MESSAGE);
+			 break;
 		 }
+		 
 		fillTable();
 	}
 	private void betal() throws DataAccessException {
