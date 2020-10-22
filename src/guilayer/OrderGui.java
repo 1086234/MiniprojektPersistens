@@ -19,6 +19,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
@@ -40,6 +41,7 @@ public class OrderGui extends JFrame {
 	private JTextField textFieldCity;
 	private JTextField textFieldCustomerID;
 	private JTextField txtVareNo;
+	private JTextField textField_Quantity;
 
 
 	/**
@@ -81,8 +83,7 @@ public class OrderGui extends JFrame {
 	    txtVareNo.addActionListener(new java.awt.event.ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	          try {
-				saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()), 1);
-				fillTable();
+	        	  addProductToOrderLine();
 			} catch (NumberFormatException | DataAccessException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -202,6 +203,13 @@ public class OrderGui extends JFrame {
 					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
 					.addGap(16))
 		);
+		
+		JLabel lblQuantity = new JLabel("Antal ");
+		panel_1.add(lblQuantity);
+		
+		textField_Quantity = new JTextField();
+		panel_1.add(textField_Quantity);
+		textField_Quantity.setColumns(10);
 		GroupLayout gl_panel_Order = new GroupLayout(panel_Order);
 		gl_panel_Order.setHorizontalGroup(
 			gl_panel_Order.createParallelGroup(Alignment.LEADING)
@@ -242,15 +250,31 @@ public class OrderGui extends JFrame {
 	
 	private void fjernVare() {
 		int row = tableOrder.getSelectedRow();
-		saleOrderController.removeSaleOrderLine(row);
-		fillTable();
+		
+		if(row == -1 ) {
+			
+		}
+		else {
+			saleOrderController.removeSaleOrderLine(row);
+			fillTable();
+		}
+		
 	}
 	
 	private void annullerOrdre() {
 		saleOrderController.clearOrderLineList();
 		fillTable();
 	}
-	
+	private void addProductToOrderLine() throws NumberFormatException, DataAccessException {
+		
+		 boolean fundet = saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()), 1);
+		 
+		 if(!fundet) {
+			 JOptionPane.showMessageDialog(null, "Den er ikke en varer med det varer nummer ", "InfoBox: " + "Ikke i systemet", JOptionPane.INFORMATION_MESSAGE);
+			  
+		 }
+		fillTable();
+	}
 	private void betal() throws DataAccessException {
 		//AddOrdreLine to database
 		saleOrderController.addOrder(saleOrderController.getOrder());

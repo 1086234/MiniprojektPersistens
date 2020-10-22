@@ -15,9 +15,10 @@ class Controller {
 	private SaleOrderController saleOrderController;
 	
 	@BeforeEach
-	void init() {
+	void init() throws DataAccessException {
 		saleOrderController = new SaleOrderController();
 		saleOrderController.createOrder();
+	
 	}
 
 	@AfterEach
