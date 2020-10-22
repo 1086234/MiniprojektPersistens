@@ -136,6 +136,7 @@ public class OrderGui extends JFrame {
 	
 
 		tableOrder = new JTable();
+		tableOrder.getTableHeader().setReorderingAllowed(false);
 		scrollPane_Order.setViewportView(tableOrder);
 		init();
 

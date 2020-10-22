@@ -17,7 +17,7 @@ import modellayer.SaleOrderLine;
 public class SaleOrderLineListTableModel extends DefaultTableModel {
 	private static final long serialVersionUID = 1L;
 	private List<SaleOrderLine> data = new ArrayList<>();
-	private static final String[] COL_NAMES = { "First name", "Mid. init", "Last name" };
+	private static final String[] COL_NAMES = { "Produkt ID", "ProduktNavn", "Antal" };
 
 	public SaleOrderLineListTableModel() {
 		setData(null);
