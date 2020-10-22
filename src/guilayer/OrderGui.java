@@ -267,23 +267,26 @@ public class OrderGui extends JFrame {
 	}
 
 	private void addProductToOrderLine() throws NumberFormatException, DataAccessException {
-		if(textFieldQuantity.getText().isEmpty())
+		if (textFieldQuantity.getText().isEmpty())
 			textFieldQuantity.setText("1");
-		
-		boolean fundet = saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()),
+
+		int fundet = saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()),
 				Integer.parseInt(textFieldQuantity.getText()));
-
-		if (!fundet) {
-			JOptionPane.showMessageDialog(null, "Den er ikke en vare med det varer nummer ",
+		if (fundet == 1) {
+			JOptionPane.showMessageDialog(null, "Der er ikke en vare med det varenummer",
 					"InfoBox: " + "Ikke i systemet", JOptionPane.INFORMATION_MESSAGE);
-
 		}
+		else if (fundet == 2) {
+			JOptionPane.showMessageDialog(null, "Der er ikke nok varer på laget for at lave denne ordre",
+					"InfoBox: " + "Ikke nok på lager", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
 		fillTable();
 	}
 
 	private void betal() throws DataAccessException, SQLException {
 		// Add costumer to order
-		if (textFieldCustomerID.getText().isEmpty())
+		if (!textFieldCustomerID.getText().isEmpty())
 			saleOrderController.addCustomer(Integer.parseInt(textFieldCustomerID.getText()));
 		else
 			saleOrderController.addCustomer();

@@ -25,23 +25,25 @@ public class SaleOrderController {
 
 	}
 
-	public boolean addProduct(int productId, int quantity) throws DataAccessException {
-		boolean fundet = false;
+	public int addProduct(int productId, int quantity) throws DataAccessException {
+		int fundet = 0;
+		boolean stockCheck;
 		productController = new ProductController();
 
 		Product product = null;
 		if (productController.findProduct(productId) != null) {
 			product = productController.findProduct(productId);
 			if (product.getStock() >= quantity) {
-
-				saleOrder.addSaleOrderLine(new SaleOrderLine(product, quantity));
-
-				fundet = true;
+				stockCheck = saleOrder.addSaleOrderLine(new SaleOrderLine(product, quantity), productController.findProduct(product.getVareNo()));
+				if(stockCheck)
+					fundet = 0;
+				else
+					fundet = 2;
 			} else {
-				fundet = false;
+				fundet = 2;
 			}
 		} else {
-			fundet = false;
+			fundet = 1;
 		}
 		return fundet;
 	}

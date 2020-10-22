@@ -79,18 +79,23 @@ public class SaleOrder {
 		return orderLineList;
 	}
 
-	public void addSaleOrderLine(SaleOrderLine saleOrderLine) {
+	public boolean addSaleOrderLine(SaleOrderLine saleOrderLine, Product product) {
 		boolean foundExisting = false;
-		for (SaleOrderLine orderLine : orderLineList) 
-		{ 
-		    if(orderLine.getProduct().getVareNo() == saleOrderLine.getProduct().getVareNo())
-		    {
-		    	orderLine.quantity = orderLine.quantity + saleOrderLine.quantity;
-		    	foundExisting = true;
+		for (SaleOrderLine orderLine : orderLineList) { 
+		    if(orderLine.getProduct().getVareNo() == saleOrderLine.getProduct().getVareNo()){
+		    	if(product.getStock() >= orderLine.quantity + saleOrderLine.quantity){
+		    		orderLine.quantity += saleOrderLine.quantity;
+		    		foundExisting = true;
+		    	}
+		    	else {
+		    		return false;
+		    	}
 		    }
 		}
 		if(foundExisting == false)
 			this.orderLineList.add(saleOrderLine);
+		
+		return true;
 	}
 
 	public void removeSaleOrderLine(int index) {
