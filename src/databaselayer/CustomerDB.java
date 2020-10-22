@@ -70,7 +70,7 @@ public class CustomerDB implements CustomerDBIF {
 			customer.setAddress(rs.getString("address"));
 			customer.setZipCode(rs.getInt("zipcode"));
 			customer.setCity(rs.getString("city"));
-			customer.setPhoneNo(rs.getString("phone"));
+			customer.setPhoneNo(rs.getString("phoneNo"));
 		
 
 		} catch (SQLException e) {

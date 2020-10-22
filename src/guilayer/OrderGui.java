@@ -164,7 +164,7 @@ public class OrderGui extends JFrame {
 		int row = tableOrder.getSelectedRow();
 		SaleOrderLine  currLine = null;
 		if(row >= 0) {
-			currLine = solltm.getEmployeeOfRow(row);
+			currLine = solltm.getSaleOrderLineOfRow(row);
 		}
 		return currLine;
 	}

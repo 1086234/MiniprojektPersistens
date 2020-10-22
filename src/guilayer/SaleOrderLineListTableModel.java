@@ -46,7 +46,7 @@ public class SaleOrderLineListTableModel extends DefaultTableModel {
 		super.fireTableDataChanged();
 	}
 
-	public SaleOrderLine getEmployeeOfRow(int index) {
+	public SaleOrderLine getSaleOrderLineOfRow(int index) {
 		if (index < 0 || index >= data.size()) {
 			return null;
 		}
