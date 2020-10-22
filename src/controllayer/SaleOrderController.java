@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.util.List;
 
 import databaselayer.SaleOrderDB;
+import modellayer.Customer;
 import modellayer.Product;
 import modellayer.SaleOrder;
 import modellayer.SaleOrderLine;
@@ -18,6 +19,7 @@ public class SaleOrderController {
 
 	public void createOrder() throws DataAccessException {
 		Date date = new Date(System.currentTimeMillis());
+		customerController = new CustomerController();
 		saleOrder = new SaleOrder(date);
 		saleOrderDB = new SaleOrderDB();
 
@@ -65,7 +67,6 @@ public class SaleOrderController {
 	}
 
 	public void addCustomer(int cId) throws DataAccessException {
-		customerController = new CustomerController();
 		saleOrder.setCustomer(customerController.findCustomer(cId));
 	}
 
@@ -82,7 +83,6 @@ public class SaleOrderController {
 	}
 	
 	public void addOrder(SaleOrder order) throws DataAccessException, SQLException {
-
 		saleOrderDB.insertOrder(order);
 	}
 }

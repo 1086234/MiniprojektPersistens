@@ -7,8 +7,8 @@ public class CustomerController {
 	private CustomerDB customerDB;
 	private Customer customer;
 	
-	public CustomerController() {
-
+	public CustomerController() throws DataAccessException {
+		customerDB = new CustomerDB();
 	}
 	
 	public Customer findCustomer(int cId) throws DataAccessException {
