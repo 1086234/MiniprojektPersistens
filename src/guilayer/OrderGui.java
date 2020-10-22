@@ -281,7 +281,6 @@ public class OrderGui extends JFrame {
 	}
 	private void betal() throws DataAccessException, SQLException {
 		//Add costumer to order
-		
 		//AddOrdreLine to database
 		saleOrderController.addOrder(saleOrderController.getOrder());
 		
