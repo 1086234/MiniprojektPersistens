@@ -25,6 +25,8 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
 
 public class OrderGui extends JFrame {
 	private SaleOrderController saleOrderController;
@@ -73,10 +75,6 @@ public class OrderGui extends JFrame {
 		JPanel panel = new JPanel();
 
 		JPanel panel_1 = new JPanel();
-
-		JPanel panel_2 = new JPanel();
-
-		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		JLabel lblVareNo = new JLabel("Varer Nummer");
 
@@ -134,22 +132,85 @@ public class OrderGui extends JFrame {
 		panel.add(textFieldAddress);
 		panel.add(lblZipCode);
 		panel.add(textFieldZipCode);
-		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
-		contentPane.add(panel);
-		contentPane.add(panel_2);
-		contentPane.add(panel_1);
 
 		JPanel panel_Order = new JPanel();
-		contentPane.add(panel_Order);
 
 		JScrollPane scrollPane_Order = new JScrollPane();
-		panel_Order.add(scrollPane_Order);
 	
 
 		tableOrder = new JTable();
 		tableOrder.getTableHeader().setReorderingAllowed(false);
 		scrollPane_Order.setViewportView(tableOrder);
+		
+		JButton btnPay = new JButton("Betal");
+		btnPay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SaleOrderLine  currLine = getSelecetProduct();
+				System.out.println(currLine.getProduct().getName());
+			}
+		});
+		
+		JButton btnCancal = new JButton("Annuller");
+		btnCancal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		JButton btnRemoveOneOrderLine = new JButton("fjern en varer");
+		btnRemoveOneOrderLine.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(btnRemoveOneOrderLine)
+							.addGap(18)
+							.addComponent(btnCancal)
+							.addGap(18)
+							.addComponent(btnPay))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(panel_Order, GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGap(5)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_Order, GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnPay)
+						.addComponent(btnCancal)
+						.addComponent(btnRemoveOneOrderLine))
+					.addGap(23))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+					.addGap(16))
+		);
+		GroupLayout gl_panel_Order = new GroupLayout(panel_Order);
+		gl_panel_Order.setHorizontalGroup(
+			gl_panel_Order.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane_Order, GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
+		);
+		gl_panel_Order.setVerticalGroup(
+			gl_panel_Order.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_Order.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane_Order, GroupLayout.PREFERRED_SIZE, 394, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(53, Short.MAX_VALUE))
+		);
+		panel_Order.setLayout(gl_panel_Order);
+		contentPane.setLayout(gl_contentPane);
 		init();
 
 	}
@@ -174,5 +235,4 @@ public class OrderGui extends JFrame {
 		List<SaleOrderLine> data = saleOrderController.getOrderLineList();
 		solltm.setData(data);
 	}
-
 }

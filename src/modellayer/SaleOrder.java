@@ -77,4 +77,8 @@ public class SaleOrder {
 	public void addSaleOrderLine(SaleOrderLine saleOrderLine) {
 		this.orderLineList.add(saleOrderLine);
 	}	
+	public void removeSaleOrderLine(int index) {
+		
+		orderLineList.remove(index);
+	}
 }

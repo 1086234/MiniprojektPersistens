@@ -41,7 +41,9 @@ public class SaleOrderController {
 		customerController = new CustomerController();
 		saleOrder.setCustomer(customerController.findCustomer(cId));
 	}
-
+	public void removeSaleOrderLine(int index) {
+		saleOrder.removeSaleOrderLine(index);
+	}
 	public void endOrder() {
 		System.out.println(saleOrder.getDeliveryNote());
 	}
