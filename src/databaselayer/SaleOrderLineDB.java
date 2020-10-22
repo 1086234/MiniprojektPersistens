@@ -2,19 +2,17 @@ package databaselayer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import controllayer.DataAccessException;
-import modellayer.Product;
 import modellayer.SaleOrderLine;
 
 public class SaleOrderLineDB implements SaleOrderLineDBIF {
 	private static final String INSERT_Q = "INSERT INTO salOrderLine(quantity, productVareId, saleOrderId) VALUES (?,?,?)";
 	private PreparedStatement insertSaleOrderLine;
 
-	public SaleOrderDB() throws DataAccessException {
+	public void SaleOrderDB() throws DataAccessException {
 		init();
 	}
 
