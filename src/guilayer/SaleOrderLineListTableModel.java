@@ -17,7 +17,7 @@ import modellayer.SaleOrderLine;
 public class SaleOrderLineListTableModel extends DefaultTableModel {
 	private static final long serialVersionUID = 1L;
 	private List<SaleOrderLine> data = new ArrayList<>();
-	private static final String[] COL_NAMES = { "Produkt ID", "ProduktNavn", "Antal" };
+	private static final String[] COL_NAMES = { "Varenummer", "Produkt", "Antal", "Pris pr enhed", "Samlet pris" };
 
 	public SaleOrderLineListTableModel() {
 		setData(null);
@@ -64,6 +64,10 @@ public class SaleOrderLineListTableModel extends DefaultTableModel {
 			return e.getProduct().getName();
 		case 2:
 			return e.getQuantity();
+		case 3:
+			return e.getProduct().getSalesPrice();
+		case 4:
+			return (e.getQuantity()*e.getProduct().getSalesPrice());
 		default:
 			return "UNKNOLWN COL NAME";
 		}
