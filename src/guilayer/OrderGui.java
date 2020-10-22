@@ -28,6 +28,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class OrderGui extends JFrame {
 	private SaleOrderController saleOrderController;
@@ -148,6 +149,9 @@ public class OrderGui extends JFrame {
 				try {
 					betal();
 				} catch (DataAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -275,7 +279,9 @@ public class OrderGui extends JFrame {
 		 }
 		fillTable();
 	}
-	private void betal() throws DataAccessException {
+	private void betal() throws DataAccessException, SQLException {
+		//Add costumer to order
+		
 		//AddOrdreLine to database
 		saleOrderController.addOrder(saleOrderController.getOrder());
 		

@@ -1,8 +1,8 @@
 package controllayer;
 
 import java.util.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.sql.SQLException;
+import java.sql.Date;
 import java.util.List;
 
 import databaselayer.SaleOrderDB;
@@ -17,8 +17,8 @@ public class SaleOrderController {
 	private CustomerController customerController;
 
 	public void createOrder() throws DataAccessException {
-
-		saleOrder = new SaleOrder(LocalDate.now());
+		Date date = new Date(System.currentTimeMillis());
+		saleOrder = new SaleOrder(date);
 		saleOrderDB = new SaleOrderDB();
 
 	}
@@ -81,7 +81,7 @@ public class SaleOrderController {
 		saleOrder.clearList();
 	}
 	
-	public void addOrder(SaleOrder order) throws DataAccessException {
+	public void addOrder(SaleOrder order) throws DataAccessException, SQLException {
 
 		saleOrderDB.insertOrder(order);
 	}
