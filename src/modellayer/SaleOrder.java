@@ -89,7 +89,6 @@ public class SaleOrder {
 		    	foundExisting = true;
 		    }
 		}
-
 		if(foundExisting == false)
 			this.orderLineList.add(saleOrderLine);
 	}

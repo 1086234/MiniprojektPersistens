@@ -200,6 +200,7 @@ public class OrderGui extends JFrame {
 		panel_1.add(lblQuantity);
 
 		textFieldQuantity = new JTextField();
+		textFieldQuantity.setText("");
 		panel_1.add(textFieldQuantity);
 		textFieldQuantity.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -266,7 +267,9 @@ public class OrderGui extends JFrame {
 	}
 
 	private void addProductToOrderLine() throws NumberFormatException, DataAccessException {
-
+		if(textFieldQuantity.getText().isEmpty())
+			textFieldQuantity.setText("1");
+		
 		boolean fundet = saleOrderController.addProduct(Integer.parseInt(txtVareNo.getText()),
 				Integer.parseInt(textFieldQuantity.getText()));
 
@@ -280,7 +283,7 @@ public class OrderGui extends JFrame {
 
 	private void betal() throws DataAccessException, SQLException {
 		// Add costumer to order
-		if (textFieldCustomerID.getText() == "")
+		if (textFieldCustomerID.getText().isEmpty())
 			saleOrderController.addCustomer(Integer.parseInt(textFieldCustomerID.getText()));
 		else
 			saleOrderController.addCustomer();

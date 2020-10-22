@@ -59,7 +59,6 @@ public class ProductDB implements ProductDBIF {
 		
 		try {
 			int vareNo = product.getVareNo();
-			System.out.print(vareNo);
 			updateStockByVareNO.setInt(1, quantity);
 			updateStockByVareNO.setInt(2, vareNo);
 			updateStockByVareNO.executeUpdate();
