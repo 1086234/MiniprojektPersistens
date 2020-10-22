@@ -59,11 +59,11 @@ public class SaleOrderLineListTableModel extends DefaultTableModel {
 		
 		switch (column) {
 		case 0:
-			return e.getProduct().getName();
+			return e.getProduct().getVareNo();
 		case 1:
-			return e.getProduct().getStock();
+			return e.getProduct().getName();
 		case 2:
-			return e.getProduct().getStock();
+			return e.getQuantity();
 		default:
 			return "UNKNOLWN COL NAME";
 		}
