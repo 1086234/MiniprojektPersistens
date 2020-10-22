@@ -16,7 +16,7 @@ public class ProductDB implements ProductDBIF {
 	private Product product;
 	private static final String FIND_BY_VARENO = "select * from product where vareNo = ?";
 	private PreparedStatement findByVareNo;
-	private static final String UPDATE_STOCK_BY_VARENO = "update product stock = ? where vareNo = ?";
+	private static final String UPDATE_STOCK_BY_VARENO = "UPDATE product SET stock = ? WHERE vareNo = ?";
 	private PreparedStatement updateStockByVareNO;
 
 	public ProductDB() throws DataAccessException {
@@ -59,9 +59,10 @@ public class ProductDB implements ProductDBIF {
 		
 		try {
 			int vareNo = product.getVareNo();
-			updateStockByVareNO.setInt(2, vareNo);
+			System.out.print(vareNo);
 			updateStockByVareNO.setInt(1, quantity);
-			updateStockByVareNO.executeQuery();
+			updateStockByVareNO.setInt(2, vareNo);
+			updateStockByVareNO.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			throw new DataAccessException(DBMessages.COULD_NOT_BIND_OR_EXECUTE_QUERY, e);

@@ -41,7 +41,6 @@ public class SaleOrderDB {
 
 	public void insertOrder(SaleOrder order) throws DataAccessException, SQLException {
 		insertInvoice(order);
-		int k = getMaxInvoice();
 		try {
 			insertSaleOrderQ.setDate(1, order.getDate());
 			insertSaleOrderQ.setInt(2, order.getAmount());

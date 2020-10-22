@@ -268,8 +268,7 @@ public class OrderGui extends JFrame {
 
 	private void betal() throws DataAccessException, SQLException {
 		// Add costumer to order
-		String ree = textFieldCustomerID.getText();
-		if (textFieldCustomerID.getText() != "")
+		if (textFieldCustomerID.getText() == "")
 			saleOrderController.addCustomer(Integer.parseInt(textFieldCustomerID.getText()));
 		else
 			saleOrderController.addCustomer();
