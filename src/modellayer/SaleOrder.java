@@ -22,7 +22,7 @@ public class SaleOrder {
 	
 	}
 	
-	public LocalDateTime getDate() {
+	public String getDate() {
 		return date;
 	}
 	

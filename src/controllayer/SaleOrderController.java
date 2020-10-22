@@ -14,8 +14,9 @@ public class SaleOrderController {
 	private SaleOrderDB saleOrderDB;
 	private ProductController productController;
 	private CustomerController customerController;
-	public void createOrder() {
+	public void createOrder() throws DataAccessException {
 		saleOrder = new SaleOrder(LocalDateTime.now());
+		saleOrderDB = new SaleOrderDB();
 
 	}
 
@@ -57,7 +58,7 @@ public class SaleOrderController {
 		saleOrder.clearList();
 	}
 	
-	public void addOrder(SaleOrder order) {
+	public void addOrder(SaleOrder order) throws DataAccessException {
 		saleOrderDB.insertOrder(order);
 	}
 }

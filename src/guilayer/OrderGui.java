@@ -144,7 +144,12 @@ public class OrderGui extends JFrame {
 		JButton btnPay = new JButton("Betal");
 		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				betal();
+				try {
+					betal();
+				} catch (DataAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
@@ -246,7 +251,7 @@ public class OrderGui extends JFrame {
 		fillTable();
 	}
 	
-	private void betal() {
+	private void betal() throws DataAccessException {
 		//AddOrdreLine to database
 		saleOrderController.addOrder(saleOrderController.getOrder());
 		
