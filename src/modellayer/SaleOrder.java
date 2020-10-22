@@ -81,4 +81,8 @@ public class SaleOrder {
 		
 		orderLineList.remove(index);
 	}
+	
+	public void clearList() {
+		this.orderLineList.clear();
+	}
 }

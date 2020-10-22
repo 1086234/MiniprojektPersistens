@@ -1,4 +1,5 @@
 package databaselayer;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,25 +10,41 @@ import controllayer.DataAccessException;
 import modellayer.Product;
 import modellayer.SaleOrderLine;
 
-public class SaleOrderLineDB implements SaleOrderLineDBIF{
-	private static final String INSERT_Q = "insert into saleorderline(id, quantity, productVareNo, saleOrderId) values(?,?,?,?)";
-	private PreparedStatement insert;
-	
-	public void init() throws controllayer.DataAccessException {
+public class SaleOrderLineDB implements SaleOrderLineDBIF {
+	private static final String INSERT_Q = "INSERT INTO salOrderLine(quantity, productVareId, saleOrderId) VALUES (?,?,?)";
+	private PreparedStatement insertSaleOrderLine;
+
+	public SaleOrderDB() throws DataAccessException {
+		init();
+	}
+
+	public void init() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
-			insert = con.prepareStatement(INSERT_Q);
+			insertSaleOrderLine = con.prepareStatement(INSERT_Q);
 		} catch (SQLException e) {
-			throw new controllayer.DataAccessException(DBMessages.COULD_NOT_PREPARE_STATEMENT, e);
+			throw new DataAccessException(DBMessages.COULD_NOT_PREPARE_STATEMENT, e);
+
 		}
 	}
-	
+
 	@Override
-	public void insertOrderLine(SaleOrderLine saleOrderLine) throws DataAccessException {
+	public void insertOrderLine(SaleOrderLine saleOrderLine, int orderId) throws DataAccessException {
 		try {
-			insert.executeQuery();
+			for (SaleOrderLine orderLine : saleOrderLineList) {
+				insertSaleOrderLine.setInt(1, orderLine.getQuantity());
+				insertSaleOrderLine.setInt(2, orderLine.getProduct().getVareNo());
+				insertSaleOrderLine.setInt(3, orderId);
+				insertSaleOrderLine.executeQuery();
+				insertSaleOrderLine = con.prepareStatement(INSERT_Q);
+			}
+
 		} catch (SQLException e) {
 			throw new controllayer.DataAccessException(DBMessages.COULD_NOT_READ_RESULTSET, e);
 		}
+	}
+
+	public void createSaleOrderLine(List<SaleOrderLine> saleOrderLineList) {
+
 	}
 }

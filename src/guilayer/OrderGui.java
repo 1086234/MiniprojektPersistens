@@ -144,20 +144,21 @@ public class OrderGui extends JFrame {
 		JButton btnPay = new JButton("Betal");
 		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SaleOrderLine  currLine = getSelecetProduct();
-				System.out.println(currLine.getProduct().getName());
+				betal();
 			}
 		});
 		
 		JButton btnCancal = new JButton("Annuller");
 		btnCancal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				annullerOrdre();
 			}
 		});
 		
-		JButton btnRemoveOneOrderLine = new JButton("fjern en varer");
+		JButton btnRemoveOneOrderLine = new JButton("fjern en vare");
 		btnRemoveOneOrderLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				fjernVare();
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -217,10 +218,9 @@ public class OrderGui extends JFrame {
 	private void init() throws DataAccessException {
 		saleOrderController = new SaleOrderController();
 		saleOrderController.createOrder();
-		// saleOrderController.addProduct(1, 1);
 		fillTable();
 	}
-	private SaleOrderLine getSelecetProduct() {
+	private SaleOrderLine getSelectedProduct() {
 		int row = tableOrder.getSelectedRow();
 		SaleOrderLine  currLine = null;
 		if(row >= 0) {
@@ -233,5 +233,25 @@ public class OrderGui extends JFrame {
 		this.tableOrder.setModel(solltm);
 		List<SaleOrderLine> data = saleOrderController.getOrderLineList();
 		solltm.setData(data);
+	}
+	
+	private void fjernVare() {
+		int row = tableOrder.getSelectedRow();
+		saleOrderController.removeSaleOrderLine(row);
+		fillTable();
+	}
+	
+	private void annullerOrdre() {
+		saleOrderController.clearOrderLineList();
+		fillTable();
+	}
+	
+	private void betal() {
+		//AddOrdreLine to database
+		saleOrderController.addOrder(saleOrderController.getOrder());
+		
+		//Remove the numbers of products sold from database
+		
+		//Clear the table
 	}
 }

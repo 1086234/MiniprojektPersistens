@@ -32,7 +32,7 @@ public class SaleOrderLine {
 		this.quantity = quantity;
 	}
 	/**
-	 * @return the quantity
+	 * @return the product
 	 */
 	public Product getProduct(){
 		return product;
