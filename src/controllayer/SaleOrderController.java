@@ -26,12 +26,12 @@ public class SaleOrderController {
 		saleOrder = new SaleOrder(date);
 		saleOrderDB = new SaleOrderDB();
 		saleOrderLineDB = new SaleOrderLineDB();
+		productController = new ProductController();
 	}
 
 	public int addProduct(int productId, int quantity) throws DataAccessException {
 		int fundet = 0;
 		boolean stockCheck;
-		productController = new ProductController();
 
 		Product product = null;
 		if (productController.findProduct(productId) != null) {
