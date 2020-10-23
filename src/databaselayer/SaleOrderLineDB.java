@@ -40,7 +40,5 @@ public class SaleOrderLineDB implements SaleOrderLineDBIF {
 		}
 	}
 
-	public void createSaleOrderLine(List<SaleOrderLine> saleOrderLineList) {
 
-	}
 }
