@@ -132,7 +132,7 @@ public class OrderGui extends JFrame {
 		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					betal();
+					confirmOrder();
 				} catch (DataAccessException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -340,7 +340,7 @@ public class OrderGui extends JFrame {
 		fillTable();
 	}
 	
-	private void betal() throws DataAccessException, SQLException {
+	private void confirmOrder() throws DataAccessException, SQLException {
 		// Add costumer to order
 		if (!textFieldCustomerID.getText().isEmpty())
 			saleOrderController.addCustomer(Integer.parseInt(textFieldCustomerID.getText()));
