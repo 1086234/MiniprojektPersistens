@@ -1,43 +1,36 @@
 package guilayer;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import controllayer.DataAccessException;
 import controllayer.SaleOrderController;
-import modellayer.Customer;
-import modellayer.Product;
-import modellayer.SaleOrder;
 import modellayer.SaleOrderLine;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextPane;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextField;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.time.LocalDateTime;
-import java.util.List;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.awt.Font;
 
 public class OrderGui extends JFrame {
 	private SaleOrderController saleOrderController;
 	private SaleOrderLineListTableModel solltm;
 	private JTable tableOrder;
 
-	private JLabel lblTotalPrices;
+	
 	private JPanel contentPane;
 	private JTextField textFieldNavn;
 	private JTextField textFieldAddress;
@@ -46,6 +39,7 @@ public class OrderGui extends JFrame {
 	private JTextField textFieldCustomerID;
 	private JTextField txtVareNo;
 	private JTextField textFieldQuantity;
+	private JLabel lblTotalPrices;
 
 	/**
 	 * Launch the application.
@@ -345,7 +339,7 @@ public class OrderGui extends JFrame {
 
 		fillTable();
 	}
-
+	
 	private void betal() throws DataAccessException, SQLException {
 		// Add costumer to order
 		if (!textFieldCustomerID.getText().isEmpty())
