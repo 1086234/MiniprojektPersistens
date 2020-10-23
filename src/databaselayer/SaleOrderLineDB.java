@@ -12,7 +12,7 @@ public class SaleOrderLineDB implements SaleOrderLineDBIF {
 	private static final String INSERT_Q = "INSERT INTO salOrderLine(quantity, productVareId, saleOrderId) VALUES (?,?,?)";
 	private PreparedStatement insertSaleOrderLine;
 
-	public void SaleOrderDB() throws DataAccessException {
+	public SaleOrderLineDB() throws DataAccessException {
 		init();
 	}
 
@@ -29,7 +29,6 @@ public class SaleOrderLineDB implements SaleOrderLineDBIF {
 	@Override
 	public void insertOrderLine(SaleOrderLine saleOrderLine, int orderId) throws DataAccessException {
 		try {
-			System.out.println(saleOrderLine.getQuantity());
 				insertSaleOrderLine.setInt(1, saleOrderLine.getQuantity());
 				insertSaleOrderLine.setInt(2, saleOrderLine.getProduct().getVareNo());
 				insertSaleOrderLine.setInt(3, orderId);

@@ -353,9 +353,9 @@ public class OrderGui extends JFrame {
 		// Remove the numbers of products sold from database
 		saleOrderController.updateNumberOfProducts();
 		saleOrderController.endOrder();
-		saleOrderController.createOrder();
+	
 		// Clear the table
-		
+		saleOrderController.createOrder();
 		fillTable();
 		
 	}

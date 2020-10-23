@@ -95,14 +95,14 @@ public class SaleOrderController {
 		 int id = addOrder(saleOrder);
 		
 		System.out.println(LocalDateTime.now());
-		for (SaleOrderLine order : getOrderLineList() ) {
-			System.out.println(order.getProduct().getName());
-			System.out.println(order.getQuantity());
-			System.out.println(order.getProduct().getSalesPrice());
+		for (SaleOrderLine orderLine : getOrderLineList() ) {
+			System.out.println(orderLine.getProduct().getName());
+			System.out.println(orderLine.getQuantity());
+			System.out.println(orderLine.getProduct().getSalesPrice());
 			double subTotal = 0;
-			subTotal = order.getQuantity() * order.getProduct().getSalesPrice();
+			subTotal = orderLine.getQuantity() * orderLine.getProduct().getSalesPrice();
 			System.out.println(subTotal);
-			saleOrderLineDB.insertOrderLine(order, id);
+			saleOrderLineDB.insertOrderLine(orderLine, id);
 		}
 		System.out.println(CalcTotalPrice());
 		System.out.println(saleOrder.getDeliveryDate());
