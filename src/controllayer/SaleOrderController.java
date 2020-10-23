@@ -2,6 +2,7 @@ package controllayer;
 
 import java.util.*;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.sql.Date;
 import java.util.List;
 
@@ -89,6 +90,18 @@ public class SaleOrderController {
 	}
 
 	public void endOrder() {
+		System.out.println(LocalDateTime.now());
+		for (SaleOrderLine order : getOrderLineList() ) {
+			System.out.println(order.getProduct().getName());
+			System.out.println(order.getQuantity());
+			System.out.println(order.getProduct().getSalesPrice());
+			double subTotal = 0;
+			subTotal = order.getQuantity() * order.getProduct().getSalesPrice();
+			System.out.println(subTotal);
+			
+		}
+		System.out.println(CalcTotalPrice());
+		System.out.println(saleOrder.getDeliveryDate());
 		System.out.println(saleOrder.getDeliveryNote());
 	}
 
