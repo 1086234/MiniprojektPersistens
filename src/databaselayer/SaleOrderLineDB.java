@@ -29,10 +29,11 @@ public class SaleOrderLineDB implements SaleOrderLineDBIF {
 	@Override
 	public void insertOrderLine(SaleOrderLine saleOrderLine, int orderId) throws DataAccessException {
 		try {
+			System.out.println(saleOrderLine.getQuantity());
 				insertSaleOrderLine.setInt(1, saleOrderLine.getQuantity());
 				insertSaleOrderLine.setInt(2, saleOrderLine.getProduct().getVareNo());
 				insertSaleOrderLine.setInt(3, orderId);
-				insertSaleOrderLine.executeQuery();
+				insertSaleOrderLine.executeUpdate();
 
 		} catch (SQLException e) {
 			throw new controllayer.DataAccessException(DBMessages.COULD_NOT_READ_RESULTSET, e);

@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.util.List;
 
 import databaselayer.SaleOrderDB;
+import databaselayer.SaleOrderLineDB;
 import modellayer.Customer;
 import modellayer.Product;
 import modellayer.SaleOrder;
@@ -17,13 +18,14 @@ public class SaleOrderController {
 	private SaleOrderDB saleOrderDB;
 	private ProductController productController;
 	private CustomerController customerController;
-
+	private SaleOrderLineDB saleOrderLineDB;
+	
 	public void createOrder() throws DataAccessException {
 		Date date = new Date(System.currentTimeMillis());
 		customerController = new CustomerController();
 		saleOrder = new SaleOrder(date);
 		saleOrderDB = new SaleOrderDB();
-
+		saleOrderLineDB = new SaleOrderLineDB();
 	}
 
 	public int addProduct(int productId, int quantity) throws DataAccessException {
@@ -89,7 +91,9 @@ public class SaleOrderController {
 		saleOrder.removeSaleOrderLine(index);
 	}
 
-	public void endOrder() {
+	public void endOrder() throws DataAccessException, SQLException {
+		 int id = addOrder(saleOrder);
+		
 		System.out.println(LocalDateTime.now());
 		for (SaleOrderLine order : getOrderLineList() ) {
 			System.out.println(order.getProduct().getName());
@@ -98,7 +102,7 @@ public class SaleOrderController {
 			double subTotal = 0;
 			subTotal = order.getQuantity() * order.getProduct().getSalesPrice();
 			System.out.println(subTotal);
-			
+			saleOrderLineDB.insertOrderLine(order, id);
 		}
 		System.out.println(CalcTotalPrice());
 		System.out.println(saleOrder.getDeliveryDate());
@@ -108,9 +112,9 @@ public class SaleOrderController {
 	public void clearOrderLineList() {
 		saleOrder.clearList();
 	}
-	
-	public void addOrder(SaleOrder order) throws DataAccessException, SQLException {
-		saleOrderDB.insertOrder(order);
+
+	public int addOrder(SaleOrder order) throws DataAccessException, SQLException {
+	 return	saleOrderDB.insertOrder(order);
 	}
 	
 	public void updateNumberOfProducts() throws DataAccessException {
